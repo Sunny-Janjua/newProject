@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup Form</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+
+  <div class="border-4 border-solid border-teal-800 p-8 rounded-lg w-[50%] bg-white shadow-lg">
+    <h1 class="text-3xl font-bold text-teal-800 mb-8 text-center">Sign Up</h1>
+    
+    <!-- Form with POST method and action pointing to your backend -->
+    <form id="signupForm" action="/signup" method="POST" class="flex flex-col space-y-4">
+      <input
+        class="py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:border-teal-500"
+        placeholder="Enter username here"
+        type="text"
+        name="username"
+        id="username"
+        required
+      />
+      <input
+        class="py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:border-teal-500"
+        placeholder="Enter email here"
+        type="email"
+        name="email"
+        id="email"
+        required
+      />
+      <input
+        class="py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:border-teal-500"
+        placeholder="Enter password here"
+        type="password"
+        name="password"
+        id="password"
+        required
+      />
+      <button
+        class="bg-teal-600 text-white py-2 px-4 rounded-md hover:bg-teal-700 transition duration-300"
+        type="submit"
+      >
+        Sign Up
+      </button>
+    </form>
+
+    <!-- Alert message for feedback -->
+    <div id="alertMessage" class="mt-4 hidden text-center text-red-600"></div>
+  </div>
+
+  <script>
+    // Event listener for form submission
+    document.getElementById('signupForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Get form data
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      // Validate input (example: simple validation)
+      if (!username || !email || !password) {
+        displayAlert("All fields are required!");
+        return;
+      }
+
+      // Simulate form submission (replace this with actual fetch request to your backend)
+      console.log('Form submitted');
+      console.log('Username:', username);
+      console.log('Email:', email);
+      console.log('Password:', password);
+
+      // Example: Use fetch API to send data to your backend
+      // Uncomment below code to use fetch
+      /*
+      fetch('/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, email, password })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        displayAlert(data.message); // Show server response message
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        displayAlert("An error occurred. Please try again.");
+      });
+      */
+
+      // Clear the form fields after submission
+      document.getElementById('signupForm').reset();
+    });
+
+    // Function to display alert messages
+    function displayAlert(message) {
+      const alertMessage = document.getElementById('alertMessage');
+      alertMessage.textContent = message;
+      alertMessage.classList.remove('hidden');
+      
+      // Hide alert after 3 seconds
+      setTimeout(() => {
+        alertMessage.classList.add('hidden');
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>

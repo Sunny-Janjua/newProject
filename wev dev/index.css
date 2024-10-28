@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+table{
+    margin: 50px;
+
+}
+/* th{
+    border: 2px solid black;
+    padding: 10px;
+}
+td{
+    border: 2px solid rgb(174, 55, 55);
+    padding: 10px;
+} */
+
+th,td{
+    border: 2px solid rgb(174, 55, 55);
+    padding: 10px;
+}
+body{
+    background-color: gray;
+}
+

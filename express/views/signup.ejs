@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <!-- Official Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Optional: Enable dark mode
+        }
+    </script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+    <div class="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md dark:bg-gray-900">
+        <div class="space-y-4">
+            <h1 class="text-3xl font-bold text-center text-gray-900 dark:text-white">Sign Up</h1>
+
+            <!-- Display Errors Here -->
+            <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+                <div class="space-y-2">
+                    <% errors.forEach(function(error) { %>
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                            <span class="block sm:inline"><%= error.msg %></span>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } %>
+
+            <form action="/signup" method="POST" class="mt-8 space-y-6">
+                
+                <!-- CSRF Token (Optional) -->
+                <% if (typeof csrfToken !== 'undefined') { %>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <% } %>
+                
+                <div class="rounded-md shadow-sm -space-y-px">
+                    <!-- Username Field -->
+                    <div>
+                        <label for="username" class="sr-only">Username</label>
+                        <input 
+                            id="username" 
+                            name="username" 
+                            type="text" 
+                            autocomplete="username" 
+                            required 
+                            class="appearance-none rounded-none relative block w-full px-3 py-2 border 
+                            border-gray-300 placeholder-gray-500 text-gray-900 dark:bg-gray-700 
+                            dark:text-white dark:placeholder-gray-400 focus:outline-none focus:ring-cyan-500 
+                            focus:border-cyan-500 focus:z-10 sm:text-sm" 
+                            placeholder="Username">
+                    </div>
+
+                    <!-- Email Field -->
+                    <div>
+                        <label for="email" class="sr-only">Email address</label>
+                        <input 
+                            id="email" 
+                            name="email" 
+                            type="email" 
+                            autocomplete="email" 
+                            required 
+                            class="appearance-none rounded-none relative block w-full px-3 py-2 border 
+                            border-gray-300 placeholder-gray-500 text-gray-900 dark:bg-gray-700 
+                            dark:text-white dark:placeholder-gray-400 focus:outline-none focus:ring-cyan-500 
+                            focus:border-cyan-500 focus:z-10 sm:text-sm" 
+                            placeholder="Email address">
+                    </div>
+
+                    <!-- Password Field -->
+                    <div>
+                        <label for="password" class="sr-only">Password</label>
+                        <input 
+                            id="password" 
+                            name="password" 
+                            type="password" 
+                            autocomplete="new-password" 
+                            required 
+                            class="appearance-none rounded-none relative block w-full px-3 py-2 border 
+                            border-gray-300 placeholder-gray-500 text-gray-900 dark:bg-gray-700 
+                            dark:text-white dark:placeholder-gray-400 focus:outline-none focus:ring-cyan-500 
+                            focus:border-cyan-500 focus:z-10 sm:text-sm" 
+                            placeholder="Password">
+                    </div>
+                </div>
+
+                <!-- Submit and Social Sign Up Buttons -->
+                <div class="flex flex-col gap-4">
+                    <!-- Main Sign Up Button -->
+                    <button 
+                        type="submit" 
+                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium 
+                        rounded-md text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 
+                        focus:ring-offset-2 focus:ring-cyan-500 transition-colors">
+                        Sign Up
+                    </button>
+                    
+                    <!-- Divider -->
+                    <div class="flex items-center justify-center">
+                        <span class="border-b w-1/5 lg:w-1/4"></span>
+                        <span class="text-center text-sm text-gray-500 px-2">OR</span>
+                        <span class="border-b w-1/5 lg:w-1/4"></span>
+                    </div>
+
+                    <!-- Sign Up with Google -->
+                    <a href="/auth/google" 
+                        class="group relative w-full flex justify-center py-2 px-4 border border-gray-300 
+                        rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 
+                        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition-colors">
+                        <svg class="w-5 h-5 mr-2" aria-hidden="true" focusable="false" data-prefix="fab" 
+                            data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512">
+                            <path fill="#FFC107" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 
+                                256S110.8 8 248 8c66.3 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 
+                                94.3 116.6 94.3 256c0 86.5 70.3 156.8 156.8 156.8 98.4 0 135.3-73.4 
+                                140.8-111.9H248v-95.1h236.1C483.6 187.6 488 224.4 488 261.8z"/>
+                        </svg>
+                        Sign up with Google
+                    </a>
+                    
+                    <!-- Sign Up with Facebook -->
+                    <a href="/auth/facebook" 
+                        class="group relative w-full flex justify-center py-2 px-4 border border-gray-300 
+                        rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 
+                        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition-colors">
+                        <svg class="w-5 h-5 mr-2" aria-hidden="true" focusable="false" data-prefix="fab" 
+                            data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            <path fill="#3B5998" d="M279.14 288l14.22-92.66h-88.91V117.33c0-25.35 12.42-50.06 
+                                52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.14 44.38-121.14 
+                                124.72V195.3H22.89V288h81.33v224h100.2V288z"/>
+                        </svg>
+                        Sign up with Facebook
+                    </a>
+                </div>
+            </form>
+        </div>
+        <div class="text-center text-sm text-gray-600 dark:text-gray-400">
+            Already have an account? 
+            <a href="/login" class="text-blue-500 hover:underline">Login here</a>
+        </div>
+    </div>
+
+</body>
+</html>
